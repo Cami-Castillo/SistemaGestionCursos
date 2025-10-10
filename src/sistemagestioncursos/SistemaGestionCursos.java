@@ -15,10 +15,10 @@ public class SistemaGestionCursos {
         
         Scanner scanner = new Scanner(System.in);
         ArrayList<Curso> cursos = new ArrayList<>();
-        Curso curso1 = new Curso();
         CursoPresencial cursoPre = new CursoPresencial();
-        CursoEnLinea cursoLinea = new CursoEnLinea();
+        CursoEnLinea cursoLinea = new CursoEnLinea();    
         ArrayList<String> muchosAlumnos = new ArrayList();
+        
         int opcion;
         
         do{
@@ -35,9 +35,11 @@ public class SistemaGestionCursos {
             
 
             switch(opcion) {
+            
                 
                 case 1:
     // Registrar curso presencial
+                    cursoPre = new CursoPresencial();
                     System.out.print("Nombre del curso presencial: ");
                     String nombrePresencial = scanner.nextLine();
                     cursoPre.setNombre(nombrePresencial);
@@ -51,13 +53,14 @@ public class SistemaGestionCursos {
                         System.out.println("\n¿Deseas agregar alumnos?");
                         System.out.println("1. Agregar un alumno");
                         System.out.println("2. Agregar varios alumnos");
-                        System.out.println("3. Salir");
+                        System.out.println("3. Volver a registro de cursos");
                         System.out.print("Selecciona opción: ");
                         opcionAlumno = scanner.nextInt();
                         scanner.nextLine(); // Limpiar buffer
 
                         switch (opcionAlumno) {
                             case 1:
+                                
                                 System.out.print("Ingrese un nombre: ");
                                 String alumno = scanner.nextLine();
                                 if (cursoPre.agregarAlumno(alumno)) {
@@ -90,12 +93,14 @@ public class SistemaGestionCursos {
                                 System.out.println("Opción no válida.");
                         }
                     } while (opcionAlumno != 3);
-
+                    
+                    cursos.add(cursoPre);   
                     System.out.println("Curso presencial registrado exitosamente.");
                     break;
 
                 case 2:
-    // Registrar curso en línea
+                // Registrar curso en línea
+                    cursoLinea = new CursoEnLinea();    
                     System.out.print("Nombre del curso en línea: ");
                     String nombreEnLinea = scanner.nextLine();
                     cursoLinea.setNombre(nombreEnLinea);
@@ -109,7 +114,7 @@ public class SistemaGestionCursos {
                         System.out.println("\n¿Deseas agregar alumnos?");
                         System.out.println("1. Agregar un alumno");
                         System.out.println("2. Agregar varios alumnos");
-                        System.out.println("3. Salir");
+                        System.out.println("3. Volver a registro de cursos");
                         System.out.print("Selecciona opción: ");
                         opcionAlumnoLinea = scanner.nextInt();
                         scanner.nextLine(); // Limpiar buffer
@@ -148,16 +153,30 @@ public class SistemaGestionCursos {
                                 System.out.println("Opción no válida.");
                         }
                     } while (opcionAlumnoLinea != 3);
-
+                    
+                    
+                    cursos.add(cursoLinea);    
                     System.out.println("Curso en línea registrado exitosamente.");
                     break;
 
 
+
                 case 3:
-                    System.out.println("Información cursos presenciales: ");
-                    cursoPre.mostrarInfoPre();
-                    System.out.println("Información cursos En Linea: ");
-                    cursoLinea.mostrarInfoEnLinea();
+
+                for (Curso cur : cursos) {
+                    if (cur instanceof CursoPresencial) {
+                        CursoPresencial cursop = (CursoPresencial) cur;
+                        System.out.println("Nombre: " + cursop.getNombre());
+                        System.out.println("Sala: " + cursop.getSala());
+                        cursop.mostrarAlumnos();  
+                        
+                    } else if (cur instanceof CursoEnLinea) {
+                        CursoEnLinea cl=(CursoEnLinea) cur;
+                        System.out.println("Nombre: " + cl.getNombre());
+                        System.out.println("Link: " + cl.getLink());
+                        cl.mostrarAlumnos();
+                    }
+                }
                     break;
 
                 case 4:
