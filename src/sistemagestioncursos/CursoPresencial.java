@@ -58,7 +58,7 @@ public class CursoPresencial extends Curso {
     
 @Override
     public void mostrarAlumnos(){
-        System.out.println("\nAlumnos: ");
+        System.out.println("Alumnos: ");
         for (String alum : alumnos){
             System.out.println(alum);
             
