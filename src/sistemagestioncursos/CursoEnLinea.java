@@ -26,6 +26,10 @@ public class CursoEnLinea extends Curso {
         mostrarAlumnos();
     }
 
+    public String getLink() {
+        return link;
+    }
+    
     public void setLink(String link) {
         this.link = link;
     }
@@ -33,12 +37,14 @@ public class CursoEnLinea extends Curso {
     
     @Override
     public void mostrarAlumnos(){
-        System.out.println("\nAlumnos: ");
+        System.out.println("Alumnos: ");
         for (String alum : alumnos){
             System.out.println(alum);
             
         }
     }
+    
+    
     
     
     
